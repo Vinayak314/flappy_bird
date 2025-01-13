@@ -7,6 +7,7 @@ import os
 
 # NOTE if velocity or displacement is negative it means we are moving upwards, and vice versa
 #for displacement the origin is at the center of the game screen, while for velocity its at top left
+
 pygame.font.init()
 
 WIN_WIDTH = 500
@@ -127,6 +128,7 @@ class Pipe:
         self.height = random.randrange(40, 450)
         self.top = self.height - self.PIPE_TOP.get_height()
         self.bottom = self.height + self.GAP
+      
         # top and bottom are the y co-ordinates
 
     def move(self):
@@ -146,6 +148,7 @@ class Pipe:
 
         b_point = bird_mask.overlap(bottom_mask, bottom_offset)
         t_point = bird_mask.overlap(top_mask, top_offset)
+      
         #when ever there is a collision they return None
 
         if t_point or b_point:
@@ -178,11 +181,13 @@ class Base:
             self.x2 = self.x1 + self.WIDTH
 
     def draw(self, win):
+
         """
         Draw the floor. This is two images that move together.
         :param win: the pygame surface/window
         :return: None
         """
+      
         win.blit(self.IMG, (self.x1, self.y))
         win.blit(self.IMG, (self.x2, self.y))
 
@@ -302,7 +307,7 @@ def main():
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_SPACE]:
             bird.jump()
-            # print("Jump")
+        
         base.move()
 
         if bird.y + bird.img.get_height() >= 730:
@@ -322,8 +327,6 @@ def main():
 
         if restart:  # If the player chooses to restart, re-call the main function
             main()
-
-        # game_over_2(win2, score)
 
     pygame.quit()
     quit()
